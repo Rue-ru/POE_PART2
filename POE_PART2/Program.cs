@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 
 namespace POE_PART2
 {
@@ -53,7 +54,7 @@ namespace POE_PART2
                 }
             }
         }
-        public static void Recipes()
+        static void Recipes()
         {
             Console.WriteLine("Recipe Name:");
             recipeName = Console.ReadLine();
@@ -106,32 +107,9 @@ namespace POE_PART2
                 recipesList.Add(addRecipe);
 
                 Console.WriteLine("Your recipe has successfully been added");
-
-                //    Console.WriteLine("Return to MAIN MENU or EXIT SYSTEM");
-                //    Console.WriteLine("1. Main Menu");
-                //    Console.WriteLine("2. Exit");
-                //    int menu = Convert.ToInt32(Console.ReadLine());
-
-                //switch(menu)
-                //{
-                //    case 1:
-                //        Main();
-                //        break;
-
-                //    case 2:
-                //        Environment.Exit(0);
-                //        break;
-
-                //    default:
-                //        Console.WriteLine("Please select an option 1 0r 2.");
-                //        Console.WriteLine("(1) Return to MAIN MENU or (2) EXIT SYSTEM");
-                //        Console.WriteLine("1. Main Menu");
-                //        Console.WriteLine("2. Exit");
-                //        break; 
-                // }
             }
         }
-        public static void Display()
+        static void Display()
         {
             int option;
             Console.WriteLine("Would you like display the entire recipe or clear the entire recipe out?");
@@ -139,36 +117,54 @@ namespace POE_PART2
             Console.WriteLine("2 --> Clear recipe");
             option = Convert.ToInt32(Console.ReadLine());
 
-            if (option == 0)
+            while (option == 1 && option ==2)
             {
-                Console.WriteLine("Invalid option");
-                return;
-            }
-            if (option == 1)
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-
-                Console.WriteLine("Recipe");
-                recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
-                for (int i = 0; i < recipesList.Count; i++)
+                if (option == 1)
                 {
-                    Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+
+                    Console.WriteLine("Recipe");
+                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                    for (int i = 0; i < recipesList.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
+                    }
+
+                    Console.Write("Enter the recipe number to view: ");
+                    int recipeNumber = int.Parse(Console.ReadLine());
+
+                    if (recipeNumber > 0 && recipeNumber <= recipesList.Count)
+                    {
+                        Recipe recipe = recipesList[recipeNumber - 1];
+                        recipe.DisplayingRecipe();
+                        double totalCalories = recipe.CalculateTotalCalories();
+                        Console.WriteLine($"Total Calories: {totalCalories}");
+
+                        if (totalCalories > 300)
+                        {
+                            Console.WriteLine("Warning: Total calories exceeds 300!");
+                        }
+                    }
+
+                    Console.WriteLine("\n METHOD");
+                    for (int b = 0; b < recipeSteps; b++)
+                    {
+
+                        Console.WriteLine("Step {0}", b);
+                        Console.WriteLine(description);
+                    }
+                    Console.ResetColor();
+                    return;
                 }
-
-
-                Console.WriteLine("\n METHOD");
-                for (int b = 0; b < recipeSteps; b++)
+                else
                 {
-
-                    Console.WriteLine("Step {0}", b);
-                    Console.WriteLine(description);
+                    Console.WriteLine("Invalid option. Please select options from the list provided");
                 }
-                Console.ResetColor();
-                return;
+            
             }
         }
 
-        public static void Adjust()
+        static void Adjust()
         {
             int option2;
             Console.WriteLine("Would you like half, double or triple the recipe incredients ");
@@ -181,48 +177,76 @@ namespace POE_PART2
             switch (option2)
             {
                 case 1:
-                    for (int i = 0; i < noOfIngredients; i++)
+                    Console.WriteLine("Recipe");
+                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                    for (int i = 0; i < recipesList.Count; i++)
                     {
-                        Console.WriteLine(ingredientName + " " + quantity / 0.5 + " " + recipeUnitsofMeasure);
-
+                        Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
                     }
 
-                    for (int b = 0; b < recipeSteps; b++)
+                    Console.Write("Enter the recipe number to view: ");
+                    int recipeNumber = int.Parse(Console.ReadLine());
+
+                    if (recipeNumber > 0 && recipeNumber <= recipesList.Count)
                     {
-                        Console.WriteLine("INGREDIENTS");
-                        Console.WriteLine($"Step {b + 1}");
-                        Console.WriteLine("\n METHOD");
-                        Console.WriteLine(description);
+                        quantity = quantity / 0.5;
+                        for (int b = 0; b < recipeSteps; b++)
+                        {
+                            Console.WriteLine("INGREDIENTS");
+                            Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine($"Step {b + 1}");
+                            Console.WriteLine(description);
+                        }
                     }
+
                     break;
 
                 case 2:
-                    for (int i = 0; i < noOfIngredients; i++)
+                    Console.WriteLine("Recipe");
+                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                    for (int i = 0; i < recipesList.Count; i++)
                     {
-                        Console.WriteLine(ingredientName + " " + quantity * 2 + " " + recipeUnitsofMeasure);
+                        Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
                     }
 
-                    for (int b = 0; b < recipeSteps; b++)
+                    Console.Write("Enter the recipe number to view: ");
+                    int recipeNumber2 = int.Parse(Console.ReadLine());
+
+                    if (recipeNumber2 > 0 && recipeNumber2 <= recipesList.Count)
                     {
-                        Console.WriteLine("INGREDIENTS");
-                        Console.WriteLine($"Step {b + 1}");
-                        Console.WriteLine("\n METHOD");
-                        Console.WriteLine(description);
+                        quantity = quantity *2;
+                        for (int b = 0; b < recipeSteps; b++)
+                        {
+                            Console.WriteLine("INGREDIENTS");
+                            Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine($"Step {b + 1}");
+                            Console.WriteLine(description);
+                        }
                     }
+
                     break;
 
                 case 3:
-                    for (int i = 0; i < noOfIngredients; i++)
+                    Console.WriteLine("Recipe");
+                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                    for (int i = 0; i < recipesList.Count; i++)
                     {
-                        Console.WriteLine(ingredientName + " " + quantity * 3 + " " + recipeUnitsofMeasure);
+                        Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
                     }
 
-                    for (int b = 0; b < recipeSteps; b++)
+                    Console.Write("Enter the recipe number to view: ");
+                    int recipeNumber3 = int.Parse(Console.ReadLine());
+
+                    if (recipeNumber3 > 0 && recipeNumber3 <= recipesList.Count)
                     {
-                        Console.WriteLine("INGREDIENTS");
-                        Console.WriteLine($"Step {b + 1}");
-                        Console.WriteLine("\n METHOD");
-                        Console.WriteLine(description);
+                        quantity = quantity * 3;
+                        for (int b = 0; b < recipeSteps; b++)
+                        {
+                            Console.WriteLine("INGREDIENTS");
+                            Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine($"Step {b + 1}");
+                            Console.WriteLine(description);
+                        }
                     }
                     break;
 
