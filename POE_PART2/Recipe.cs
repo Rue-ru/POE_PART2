@@ -4,18 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace POE_PART2
 {
-    public class Recipe
+    class Recipe
     {
 
         public string RecipeName { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public List<string> Description { get; set; }
-        public int Quantity { get; set; }
-        public int RecipeUnitsofMeasure { get; set; }
-        public int RecipeSteps { get; set; }
 
 
         public Recipe(string recipeName)
@@ -29,9 +27,34 @@ namespace POE_PART2
             Ingredients.Add(ingredient);
         }
 
-        public void AddingStep(string recipeSteps)
+        public void AddingStep(string description)
         {
-            RecipeSteps.Add(recipeSteps);
+            Description.Add(description);
+        }
+
+        public void DisplayingRecipe()
+        {
+            Console.WriteLine($"Recipe: {RecipeName}");
+            Console.WriteLine("Ingredients:");
+            foreach (var ingredient in Ingredients)
+            {
+                Console.WriteLine($"- {ingredient.Quantity} {ingredient.RecipeUnitofMeasure}");
+            }
+            Console.WriteLine("Steps:");
+            for (int i = 0; i < Description.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Description[i]}");
+            }
+        }
+
+        public double CalculateTotalCalories()
+        {
+            double totalCalories = 0;
+            foreach (var ingredient in Ingredients)
+            {
+                totalCalories += ingredient.Calories;
+            }
+            return totalCalories;
         }
 
     }
