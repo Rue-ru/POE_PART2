@@ -125,7 +125,7 @@ namespace POE_PART2
                     Console.ForegroundColor = ConsoleColor.Blue;
 
                     Console.WriteLine("Recipe");
-                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                    recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName)); //display the recipes tha have been added
                     for (int i = 0; i < recipesList.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
@@ -134,7 +134,7 @@ namespace POE_PART2
                     Console.Write("Enter the recipe number to view: ");
                     int recipeNumber = int.Parse(Console.ReadLine());
 
-                    if (recipeNumber > 0 && recipeNumber <= recipesList.Count)
+                    if (recipeNumber > 0 && recipeNumber <= recipesList.Count) //displaying the recipe they chose.
                     {
                         Recipe recipe = recipesList[recipeNumber - 1];
                         recipe.DisplayingRecipe();
@@ -167,6 +167,7 @@ namespace POE_PART2
 
         static void Adjust()
         {
+            //users can agjust their units of measurement
             int option2;
             Console.WriteLine("Would you like half, double or triple the recipe incredients ");
             Console.WriteLine("1 --> half");
@@ -195,6 +196,7 @@ namespace POE_PART2
                         {
                             Console.WriteLine("INGREDIENTS");
                             Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine("METHOD"); 
                             Console.WriteLine($"Step {b + 1}");
                             Console.WriteLine(description);
                         }
@@ -220,6 +222,7 @@ namespace POE_PART2
                         {
                             Console.WriteLine("INGREDIENTS");
                             Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine("METHOD");
                             Console.WriteLine($"Step {b + 1}");
                             Console.WriteLine(description);
                         }
@@ -245,6 +248,7 @@ namespace POE_PART2
                         {
                             Console.WriteLine("INGREDIENTS");
                             Console.WriteLine(ingredientName, quantity, recipeUnitsofMeasure);
+                            Console.WriteLine("METHOD");
                             Console.WriteLine($"Step {b + 1}");
                             Console.WriteLine(description);
                         }
