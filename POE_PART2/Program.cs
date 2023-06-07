@@ -148,11 +148,13 @@ namespace POE_PART2
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
 
-                Console.WriteLine("INGREDIENTS");
-                for (int i = 0; i < noOfIngredients; i++)
+                Console.WriteLine("Recipe");
+                recipesList.Sort((res1, res2) => string.Compare(res1.RecipeName, res2.RecipeName));
+                for (int i = 0; i < recipesList.Count; i++)
                 {
-                    Console.WriteLine(ingredientName + " " + quantity + " " + recipeUnitsofMeasure);
+                    Console.WriteLine($"{i + 1}. {recipesList[i].RecipeName}");
                 }
+
 
                 Console.WriteLine("\n METHOD");
                 for (int b = 0; b < recipeSteps; b++)
@@ -162,14 +164,6 @@ namespace POE_PART2
                     Console.WriteLine(description);
                 }
                 Console.ResetColor();
-                return;
-            }
-            else if (option == 2)
-            {
-                Array.Clear(ingredientName, 0, ingredientName.Length);
-                Array.Clear(quantity, 0, quantity.Length);
-                Array.Clear(recipeUnitsofMeasure, 0, recipeUnitsofMeasure.Length);
-                Array.Clear(description, 0, description.Length);
                 return;
             }
         }
