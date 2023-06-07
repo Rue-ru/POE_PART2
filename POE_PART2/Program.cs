@@ -25,7 +25,8 @@ namespace POE_PART2
         static void Main(string[] args)
         {
             Console.WriteLine("Recipes Menu:");
-            while (true)
+
+            while (true) //while statement is true it will keep looping through this menu. 
             {
                 Console.WriteLine("Please select from the options provided:");
                 Console.WriteLine("1. Add Recipe");
@@ -56,10 +57,11 @@ namespace POE_PART2
         }
         static void Recipes()
         {
+            //adding recipe name, ingredients, units, quantities, calories, food group and steps
             Console.WriteLine("Recipe Name:");
             recipeName = Console.ReadLine();
 
-            Recipe addRecipe = new Recipe(recipeName);
+            Recipe addRecipe = new Recipe(recipeName); //adding a list called addRecipe
 
             Console.WriteLine("Number of ingredients?");
             noOfIngredients = Convert.ToInt32(Console.ReadLine());
@@ -92,8 +94,6 @@ namespace POE_PART2
                 Ingredient ingredient = new Ingredient(ingredientName, quantity, recipeUnitsofMeasure, calories, foodGroup);
                 addRecipe.AddingIngredient(ingredient);
 
-
-
                 Console.WriteLine("Number of steps?");
                 recipeSteps = Convert.ToInt32(Console.ReadLine());
 
@@ -111,13 +111,14 @@ namespace POE_PART2
         }
         static void Display()
         {
+            //giving users the option to display the recipes or clear them. 
             int option;
             Console.WriteLine("Would you like display the entire recipe or clear the entire recipe out?");
             Console.WriteLine("1 --> Display");
             Console.WriteLine("2 --> Clear recipe");
             option = Convert.ToInt32(Console.ReadLine());
 
-            while (option == 1 && option ==2)
+            while (option == 1 && option ==2) //exception handling function
             {
                 if (option == 1)
                 {
