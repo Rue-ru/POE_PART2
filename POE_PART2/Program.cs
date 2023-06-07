@@ -161,6 +161,11 @@ namespace POE_PART2
                 {
                     Console.WriteLine("Invalid option. Please select options from the list provided");
                 }
+
+                if (option ==2)
+                {
+                    Recipe.RemoveAt(recipeName, quantity, recipeSteps, description);
+                }
             
             }
         }
@@ -217,7 +222,7 @@ namespace POE_PART2
 
                     if (recipeNumber2 > 0 && recipeNumber2 <= recipesList.Count)
                     {
-                        quantity = quantity *2;
+                        quantity = quantity * 2;
                         for (int b = 0; b < recipeSteps; b++)
                         {
                             Console.WriteLine("INGREDIENTS");
@@ -227,7 +232,6 @@ namespace POE_PART2
                             Console.WriteLine(description);
                         }
                     }
-
                     break;
 
                 case 3:
