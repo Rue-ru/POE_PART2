@@ -10,7 +10,7 @@ namespace POE_PART2
 {
     class Recipe
     {
-
+        //child class of the recipes dispaly in program 
         public string RecipeName { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public List<string> Description { get; set; }
@@ -25,15 +25,18 @@ namespace POE_PART2
         public void AddingIngredient(Ingredient ingredient)
         {
             Ingredients.Add(ingredient);
+            //creating ingredients list
         }
 
         public void AddingStep(string description)
         {
             Description.Add(description);
+            //creating descriptions list
         }
 
         public void DisplayingRecipe()
         {
+            //standard calculation and display of recipes
             Console.WriteLine($"Recipe: {RecipeName}");
             Console.WriteLine("Ingredients:");
             foreach (var ingredient in Ingredients)
