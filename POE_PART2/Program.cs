@@ -6,7 +6,8 @@ using System.Xml.Linq;
 
 namespace POE_PART2
 {
-
+    public delegate void calorieLimit(int c);//creating a delegate 
+   
     public class Program
     {
         public static int recipeSteps;
@@ -21,6 +22,8 @@ namespace POE_PART2
         public static String description;
 
         static List<Recipe> recipesList = new List<Recipe>();
+
+        static int limit = 300; // declaring the calories limit 
 
         static void Main(string[] args)
         {
@@ -77,10 +80,12 @@ namespace POE_PART2
                 Console.WriteLine("Ingredient quantity:");
                 quantity = Convert.ToInt32(Console.ReadLine());
 
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Measuring units to use:");
                 Console.WriteLine("Tsp, Tbsp, Gram, Kilogram, Cup, Millilitre, Litre, Quart, Pint,");
                 Console.WriteLine(" Fl oz, Ounce, Gal, Pound, Slices, Diced, Large, Small ");
                 Console.WriteLine();
+                Console.ResetColor();
 
                 Console.WriteLine("Guidance of measuring units have been provided for you. \n Select a unit based on list provided:");
                 recipeUnitsofMeasure = Console.ReadLine();
@@ -90,7 +95,7 @@ namespace POE_PART2
 
                 Console.WriteLine("Food Group the ingredient classifies as:");
                 foodGroup = Console.ReadLine();
-
+            }
                 Ingredient ingredient = new Ingredient(ingredientName, quantity, recipeUnitsofMeasure, calories, foodGroup);
                 addRecipe.AddingIngredient(ingredient);
 
@@ -107,7 +112,21 @@ namespace POE_PART2
                 recipesList.Add(addRecipe);
 
                 Console.WriteLine("Your recipe has successfully been added");
-            }
+            
+        }
+
+
+
+        public static void Delegate()
+        {
+            calorieLimit caloriesEntered = new calorieLimit(TotalCalories);
+
+        }
+
+        public static int TotalCalories(int n)
+        {
+            n = calories * noOfIngredients;
+            return n;
         }
         static void Display()
         {
@@ -118,7 +137,7 @@ namespace POE_PART2
             Console.WriteLine("2 --> Clear recipe");
             option = Convert.ToInt32(Console.ReadLine());
 
-            while (option == 1 && option ==2) //exception handling function
+            while (option == 1 || option ==2) //exception handling function
             {
                 if (option == 1)
                 {
@@ -164,7 +183,7 @@ namespace POE_PART2
 
                 if (option ==2)
                 {
-                    Recipe.RemoveAt(recipeName, quantity, recipeSteps, description);
+                    //Recipe.Remove(recipeName, quantity, recipeSteps, description);
                 }
             
             }
