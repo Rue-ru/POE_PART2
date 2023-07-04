@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoeApp3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Recipe Application" Height="450" Width="400">
+    <StackPanel>
+        <Menu Grid.Row="0" Margin="0 0 0 90">
+            <MenuItem Header="Add"></MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Display"/>
+                <Separator/>
+                <MenuItem Header=" Clear"/>
+            </MenuItem>
+            <MenuItem Header=" Adjust"></MenuItem>
+        </Menu>
+        <TextBlock Text=" WELCOME" FontSize="30" FontWeight="Bold" Width="160" Height="49" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="17.811"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-12.691"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Button Content="Add Recipe" FontSize="15"  Margin="144,42,144,44" Click="Button_Click"/>
 
-    </Grid>
+    </StackPanel>
 </Window>
