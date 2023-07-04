@@ -9,6 +9,6 @@
       Title="AddRecipe">
 
     <Grid>
-        
+        <TextBlock Text="Hello"/>
     </Grid>
 </Page>
