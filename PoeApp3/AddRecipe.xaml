@@ -8,7 +8,46 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddRecipe">
 
-    <Grid>
-        <TextBlock Text="Hello"/>
+    <Grid Background="White">
+        <StackPanel Margin="0,0,0,-123">
+            <Menu >
+                <MenuItem x:Name="Recipe1" Header="Add" Click="RecipeButton_Click" ></MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem x:Name="display" Header="Display"/>
+                    <Separator/>
+                    <MenuItem Header=" Clear"/>
+                </MenuItem>
+                <MenuItem x:Name="adjust" Header=" Adjust"></MenuItem>
+            </Menu>
+            <TextBlock Text="Add Recipe" FontSize="30" FontWeight="Bold" Width="184" Height="53" TextAlignment="Center" TextWrapping="Wrap"/>
+            <StackPanel>
+                <Label x:Name="Recipe" Content="Recipe Name" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="RecipeText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="NoOFIngredients" Content="Number of Ingredients" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="IngredientText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="IngredientName" Content="Ingredient Name" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="IngNameText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="Quantities" Content="Quantity" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="QuantitiesText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="Calories" Content="Calories" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="CaloriesText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="FoodGroups" Content="Food Group" Margin="0 0 250 0" ></Label>
+                <TextBox x:Name="FoodGroupsText" Width=" 200" Height="30" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="Recipe2" Content="Add Recipe" FontSize="15" Click="RecipeButton_Click" Width="118" Margin="20"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
