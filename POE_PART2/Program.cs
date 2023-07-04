@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace POE_PART2
 {
-    public delegate void calorieLimit(int c);//creating a delegate 
+    public delegate int calorieLimit(int c, int i);//creating a delegate 
    
     public class Program
     {
@@ -22,8 +22,6 @@ namespace POE_PART2
         public static String description;
 
         static List<Recipe> recipesList = new List<Recipe>();
-
-        static int limit = 300; // declaring the calories limit 
 
         static void Main(string[] args)
         {
@@ -90,44 +88,37 @@ namespace POE_PART2
                 Console.WriteLine("Guidance of measuring units have been provided for you. \n Select a unit based on list provided:");
                 recipeUnitsofMeasure = Console.ReadLine();
 
-                Console.WriteLine("Ingredient calories:");
+                Console.WriteLine("\n" + "Ingredient calories:");
                 calories = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("Food Group the ingredient classifies as:");
+                Console.WriteLine("\n" + "Food Group the ingredient classifies as:");
                 foodGroup = Console.ReadLine();
             }
-                Ingredient ingredient = new Ingredient(ingredientName, quantity, recipeUnitsofMeasure, calories, foodGroup);
-                addRecipe.AddingIngredient(ingredient);
+            Ingredient ingredient = new Ingredient(ingredientName, quantity, recipeUnitsofMeasure, calories, foodGroup);
+            addRecipe.AddingIngredient(ingredient);
 
-                Console.WriteLine("Number of steps?");
-                recipeSteps = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Number of steps?");
+            recipeSteps = Convert.ToInt32(Console.ReadLine());
 
-                for (int b = 0; b < recipeSteps; b++)
-                {
-                    Console.WriteLine($"Step {b + 1}:");
-                    description = Console.ReadLine();
-                    addRecipe.AddingStep(description);
-                }
+            for (int b = 0; b < recipeSteps; b++)
+            {
+                Console.WriteLine($"Step {b + 1}:");
+                description = Console.ReadLine();
+                addRecipe.AddingStep(description);
+            }
 
-                recipesList.Add(addRecipe);
+            recipesList.Add(addRecipe);
 
-                Console.WriteLine("Your recipe has successfully been added");
-            
+            Console.WriteLine("Your recipe has successfully been added");
+
         }
 
-
-
-        public static void Delegate()
+        public static int limit = 300; // declaring the calories limit 
+        public static int Calories(int n, int i) //defining the method that returns the sum of the 2 integars
         {
-            calorieLimit caloriesEntered = new calorieLimit(TotalCalories);
-
+            return i * n;
         }
 
-        public static int TotalCalories(int n)
-        {
-            n = calories * noOfIngredients;
-            return n;
-        }
         static void Display()
         {
             //giving users the option to display the recipes or clear them. 
@@ -157,10 +148,13 @@ namespace POE_PART2
                     {
                         Recipe recipe = recipesList[recipeNumber - 1];
                         recipe.DisplayingRecipe();
-                        double totalCalories = recipe.CalculateTotalCalories();
-                        Console.WriteLine($"Total Calories: {totalCalories}");
 
-                        if (totalCalories > 300)
+                        calorieLimit cal = new calorieLimit(Calories);//adding the an instance of the delegation
+
+                        int totCalories = cal(calories, noOfIngredients);//total calaries calculation 
+                        Console.WriteLine($"Total Calories: {totCalories}");
+
+                        if (totCalories > limit)
                         {
                             Console.WriteLine("Warning: Total calories exceeds 300!");
                         }
