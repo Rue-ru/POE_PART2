@@ -5,28 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoeApp3"
         mc:Ignorable="d"
-        Title="Recipe Application" Height="450" Width="400">
-    <StackPanel>
-        <Menu Grid.Row="0" Margin="0 0 0 90">
-            <MenuItem Header="Add"></MenuItem>
-            <MenuItem Header="View">
-                <MenuItem Header="Display"/>
-                <Separator/>
-                <MenuItem Header=" Clear"/>
-            </MenuItem>
-            <MenuItem Header=" Adjust"></MenuItem>
-        </Menu>
-        <TextBlock Text=" WELCOME" FontSize="30" FontWeight="Bold" Width="160" Height="49" RenderTransformOrigin="0.5,0.5">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="17.811"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-12.691"/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <Button Content="Add Recipe" FontSize="15"  Margin="144,42,144,44" Click="Button_Click"/>
+        Title="Recipe Application" Height="400" Width="400">
+    <Grid>
+        <Frame x:Name="Main"></Frame>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-    </StackPanel>
+        <TextBlock Grid.Row="0" Text=" WELCOME" FontSize="30" FontWeight="Bold" Width="184" Height="53" TextAlignment="Center" TextWrapping="Wrap"/>
+        <Button  Grid.Row="1" x:Name="Recipe2" Content="Add New Recipe" FontSize="15" Click="RecipeButton_Click" Width="128" Margin="10"/>
+        <Button  Grid.Row="2" x:Name="Adjustments" Content="Adjust" FontSize="15" Click="AdjustButton_Click" Width="128" Margin="10"/>
+        <Button Grid.Row="3"  x:Name="Display" Content="Display " FontSize="15" Click="DisplayButton_Click" Width="128" Margin="10"/>
+        <Button Grid.Row="4"  x:Name="Exit" Content="Exit" FontSize="15" Click="ExitButton_Click" Width="128" Margin="10"/>
+    
+
+    </Grid>
 </Window>
